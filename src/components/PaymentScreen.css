@@ -1,0 +1,42 @@
+.paymentScreen {
+  padding-top: 1rem;
+}
+
+.loadingScreen {
+  display: flex;
+  justify-content: center;
+}
+
+.loadingScreen__progressBar {
+  width: 50%;
+}
+
+.paymentScreenDiv > h1 {
+  padding-top: 1rem;
+  text-align: center;
+}
+
+.paymentScreenDiv__imageDiv {
+  display: flex;
+  justify-content: center;
+}
+
+.waitingForPaymentDiv {
+  display: flex;
+  justify-content: center;
+  padding-top: 5rem;
+}
+
+.waitingForPaymentDiv__content {
+  border-left: dotted 2px black;
+  border-right: dotted 2px black;
+  border-bottom: solid 2px black;
+  width: fit-content;
+  display: inline-flex;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.waitingForPaymentDiv__content > h2 {
+  padding-right: 1rem;
+}

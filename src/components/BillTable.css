@@ -1,0 +1,23 @@
+.table {
+  width: auto !important;
+  min-width: 527.407px !important;
+}
+
+.billTable {
+  width: fit-content !important;
+  min-width: 530px !important;
+}
+
+.MuiTableHead-root {
+  background-color: black !important;
+  color: white !important;
+}
+
+.MuiTableCell-head {
+  color: white !important;
+  border-right: inset !important;
+}
+
+.MuiTableCell-body {
+  border-right: outset black !important;
+}
