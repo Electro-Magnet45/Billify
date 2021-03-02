@@ -15,7 +15,7 @@ const PaymentScreen = () => {
   //
   useEffect(() => {
     fetch(
-      `http://api.qrserver.com/v1/create-qr-code/?data=${amount}&size=200x200`,
+      `https://api.qrserver.com/v1/create-qr-code/?data=${amount}&size=200x200`,
       {
         method: "GET",
       }
