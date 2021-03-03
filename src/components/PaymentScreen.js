@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
 import "./PaymentScreen.css";
 import { useLocation } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 import { LinearProgress, CircularProgress } from "@material-ui/core";
+import { io } from "socket.io-client";
 
 const PaymentScreen = () => {
   const location = useLocation();
+  const history = useHistory();
 
   const amount = location.state.detail;
 
@@ -27,6 +30,29 @@ const PaymentScreen = () => {
         console.log("error occured");
       }
     });
+
+    const socket = io("wss://thawing-bayou-91298.herokuapp.com");
+
+    socket.on("connect", () => {
+      console.log("connected");
+
+      socket.on("payment status", (msg) => {
+        if (msg === "true") {
+          history.push("/");
+        }
+      });
+    });
+
+    socket.on("disconnect", () => {
+      console.log("disconnected"); // undefined
+    });
+
+    /*  socket.on("finishPayment", (msg) => {
+      console.log(msg);
+        if (msg === true) {
+        history.push("/");
+      }
+    }); */
   }, []);
 
   return (

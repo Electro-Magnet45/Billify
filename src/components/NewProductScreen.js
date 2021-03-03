@@ -39,7 +39,6 @@ const NewProductScreen = () => {
         }
       });
     } else {
-      const newProduct = { name: productName, price: productPrice };
       localStorage.setItem(
         "products",
         JSON.stringify([{ name: productName, price: productPrice }])

@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React from "react";
 import "./BillTable.css";
 
 import Table from "@material-ui/core/Table";
