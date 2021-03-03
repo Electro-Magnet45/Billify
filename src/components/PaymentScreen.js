@@ -37,6 +37,7 @@ const PaymentScreen = () => {
       console.log("connected");
 
       socket.on("payment status", (msg) => {
+        console.log(msg);
         if (msg === "true") {
           history.push("/");
         }
