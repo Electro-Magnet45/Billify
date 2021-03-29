@@ -4,6 +4,7 @@ import { useLocation } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 
 import { LinearProgress, CircularProgress } from "@material-ui/core";
+import successAnimation from "../videos/billlfy__paymentScreen_sucess.mp4";
 import { io } from "socket.io-client";
 
 const PaymentScreen = () => {
@@ -14,6 +15,7 @@ const PaymentScreen = () => {
 
   const [isLoading, setIsLoading] = useState(true);
   const [qrCodeUrl, setQrCodeUrl] = useState(null);
+  const [didPay, setDidPay] = useState(false);
 
   //
   useEffect(() => {
@@ -39,22 +41,24 @@ const PaymentScreen = () => {
       socket.on("payment status", (msg) => {
         console.log(msg);
         if (msg === "success") {
-          history.push("/");
+          setDidPay(true);
         }
       });
     });
 
     socket.on("disconnect", () => {
-      console.log("disconnected"); // undefined
+      console.log("disconnected");
     });
-
-    /*  socket.on("finishPayment", (msg) => {
-      console.log(msg);
-        if (msg === true) {
-        history.push("/");
-      }
-    }); */
   }, []);
+
+  useEffect(() => {
+    if (didPay) {
+      document.getElementById("success__animePlayer").play();
+      setTimeout(() => {
+        history.push("/");
+      }, 1700);
+    }
+  }, [didPay]);
 
   return (
     <div className="paymentScreen">
@@ -65,7 +69,7 @@ const PaymentScreen = () => {
       )}
       {!isLoading && (
         <div className="paymentScreenDiv">
-          {qrCodeUrl && (
+          {qrCodeUrl && !didPay && (
             <div className="paymentScreenDiv__imageDiv">
               <img src={qrCodeUrl} alt="Logo" />
             </div>
@@ -76,8 +80,21 @@ const PaymentScreen = () => {
       {!isLoading && (
         <div className="waitingForPaymentDiv">
           <div className="waitingForPaymentDiv__content">
-            <h2>Waiting for Payment</h2>
-            <CircularProgress />
+            {!didPay && <h2>Waiting for Payment</h2>}
+            {!didPay && <CircularProgress />}
+
+            {didPay && (
+              <video
+                width="320"
+                height="240"
+                id="success__animePlayer"
+                autoPlay={true}
+                muted
+              >
+                <source src={successAnimation} type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            )}
           </div>
         </div>
       )}
